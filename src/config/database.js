@@ -9,8 +9,17 @@ const sequelize = new Sequelize(
     process.env.DB_PASSWORD || "",
     {
         host: process.env.DB_HOST || "localhost",
-        port: process.env.DB_PORT || 3306,
-        dialect: "mysql"
+        port: process.env.DB_PORT || 16916,
+        dialect: "mysql",
+        logging: (msg) => {
+            if (/show tables/i.test(msg)) {
+                console.log(msg);
+            }
+            // logging: (msg) => {
+            // if (/select \*/i.test(msg)) {
+            //     console.log(msg);
+            // }
+        }
     }
 );
 
